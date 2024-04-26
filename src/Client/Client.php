@@ -31,7 +31,9 @@ class Client implements IClient
     function request(string $method, string $endpoint, array $options = []): RSResponse
     {
         try {
-            return RSResponse::from($r);
+            return RSResponse::from(
+                $this->client->request($method, $endpoint, $options)
+            );
         }catch (GuzzleException $exception){
             throw new RSIntegrationException(
                 sprintf("cannot communicate to rs service error was: %s",$exception->getMessage()),
