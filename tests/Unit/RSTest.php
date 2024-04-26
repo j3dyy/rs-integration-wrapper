@@ -15,8 +15,8 @@ describe('test authentication', function () {
         $client = new \J3dyy\RsIntegrationWrapper\Client\Client();
 
         $this->rs = new \J3dyy\RsIntegrationWrapper\RS($client);
-        $this->username = '426517753';
-        $this->password = '426517753E1';
+        $this->username = '';
+        $this->password = '';
     });
 
     it("authentication test",function (){
