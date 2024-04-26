@@ -7,5 +7,5 @@ use Psr\Http\Message\ResponseInterface;
 interface IClient
 {
 
-    function request(string $method, string $endpoint, array $options = []): ResponseInterface;
+    function request(string $method, string $endpoint, array $options = []): RSResponse;
 }
