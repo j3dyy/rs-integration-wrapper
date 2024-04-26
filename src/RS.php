@@ -25,6 +25,6 @@ class RS
             ]
         ]);
 
-        return RSResponse::from($r);
+        return $r;
     }
 }

@@ -28,13 +28,13 @@ class Client implements IClient
      * @return ResponseInterface
      * @throws RSIntegrationException
      */
-    function request(string $method, string $endpoint, array $options = []): ResponseInterface
+    function request(string $method, string $endpoint, array $options = []): RSResponse
     {
         try {
-            return $this->client->request($method, $endpoint, $options);
+            return RSResponse::from($r);
         }catch (GuzzleException $exception){
             throw new RSIntegrationException(
-                sprintf("cannot communicate to rs service error was: %s",$exception->getTraceAsString()),
+                sprintf("cannot communicate to rs service error was: %s",$exception->getMessage()),
                 500
             );
         }

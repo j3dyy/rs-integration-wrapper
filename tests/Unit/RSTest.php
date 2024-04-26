@@ -1,45 +1,70 @@
 <?php declare(strict_types=1);
 
 
-use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
+use J3dyy\RsIntegrationWrapper\Client\Client;
+use J3dyy\RsIntegrationWrapper\Exceptions\RSIntegrationException;
+use J3dyy\RsIntegrationWrapper\RS;
 
 describe('test authentication', function () {
 
-    beforeEach(function () {
+    $rs = new RS(clientMock());
 
-        $client = new \J3dyy\RsIntegrationWrapper\Client\Client();
-
-        $this->rs = new \J3dyy\RsIntegrationWrapper\RS($client);
-        $this->username = '';
-        $this->password = '';
-    });
-
-    it("authentication test",function (){
-
-//        $mock = new MockHandler([
-//            new Response(200, ['X-Foo' => 'Bar'], 'Hello, World'),
-//            new Response(202, ['Content-Length' => 0]),
-//            new RequestException('Error Communicating with Server', new Request('GET', 'test'))
-//        ]);
-//        $handlerStack = HandlerStack::create($mock);
-//        $client = new Client(['handler' => $handlerStack]);
-
-
-        $response = $this->rs->authenticate(
-            $this->username,
-            $this->password
+    it("authentication test", function () use($rs) {
+        $response = $rs->authenticate(
+           '',
+           ''
         );
 
+        expect($response->getStatusCode())
+            ->toBe(200)
+            ->and($response->getResponse())->toBe(authSuccessMock());
 
-
-        expect($response->getStatusCode())->toBe(200);
-        expect(true)->toBeTrue();
     });
+
+    it("wraps unauthorized request", function () use ($rs) {
+        $response = $rs->authenticate(
+            '',
+            ''
+        );
+    })->throws(RSIntegrationException::class);
+
+    it("wraps internal response", function () use ($rs) {
+        $response = $rs->authenticate(
+            '',
+            ''
+        );
+    })->throws(RSIntegrationException::class);
 });
 
 
+function authSuccessMock(): array
+{
+    return [
+        "DATA" => [
+            "ACCESS_TOKEN" => "fafo",
+            "EXPIRES_IN" => 2400,
+            "MASKED_MOBILE" => "",
+        ],
+        "STATUS"=>[
+            "ID"=>0,
+            "TEXT" => 'წარმატებით დასრულდა'
+        ]
+    ];
+}
+
+
+function clientMock():Client
+{
+    $mock = new MockHandler([
+        new Response(200, ['X-Foo' => 'Bar'], json_encode(authSuccessMock())),
+        new Response(401, ['X-Foo' => 'Bar'], json_encode(authSuccessMock())),
+        new Response(500, ['X-Foo' => 'Bar']),
+    ]);
+
+    return new Client($mock);
+}
