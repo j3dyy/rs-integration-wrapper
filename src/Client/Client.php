@@ -25,7 +25,7 @@ class Client implements IClient
      * @param string $method
      * @param string $endpoint
      * @param array $options
-     * @return ResponseInterface
+     * @return RSResponse
      * @throws RSIntegrationException
      */
     function request(string $method, string $endpoint, array $options = []): RSResponse
