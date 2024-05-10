@@ -7,7 +7,7 @@ use GuzzleHttp\HandlerStack;
 use J3dyy\RsIntegrationWrapper\Exceptions\RSIntegrationException;
 use Psr\Http\Message\ResponseInterface;
 use GuzzleHttp\Client as GuzzleClient;
-class Client implements IClient
+class EApiClient implements IClient
 {
     protected GuzzleClient  $client;
 
@@ -35,9 +35,10 @@ class Client implements IClient
                 $this->client->request($method, $endpoint, $options)
             );
         }catch (GuzzleException $exception){
+
             throw new RSIntegrationException(
-                sprintf("cannot communicate to rs service error was: %s",$exception->getMessage()),
-                500
+                $exception->getMessage(),
+                $exception->getCode()
             );
         }
     }

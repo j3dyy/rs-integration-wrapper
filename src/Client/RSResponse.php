@@ -15,9 +15,19 @@ class RSResponse implements IRSResponse
     {
     }
 
-    public static function from(ResponseInterface $response): RSResponse
+    public static function from(ResponseInterface $response, string $type = 'json'): RSResponse
     {
-        $data = json_decode($response->getBody()->getContents(), true);
+        $data = null;
+        switch ($type) {
+            case 'json':
+                $data = json_decode($response->getBody()->getContents(), true);
+                break;
+            case 'wayBill':
+                $r = strtr($response->getBody()->getContents(), ['</soap:' => '</', '<soap:' => '<']);
+                $data = (array)json_decode(json_encode(simplexml_load_string($r)));
+                break;
+        }
+
 
         return new RSResponse(
             $data,
