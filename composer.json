@@ -1,6 +1,6 @@
 {
   "name": "j3dyy/rs-integration-wrapper",
-  "description": "rs.ge integration services",
+  "description": "rs.ge integration services project now is under development",
   "type": "library",
   "require": {
     "guzzlehttp/guzzle": "^7.8"

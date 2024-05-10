@@ -2,11 +2,12 @@
 namespace J3dyy\RsIntegrationWrapper;
 
 
-
+use J3dyy\RsIntegrationWrapper\Client\EApiClient;
 use J3dyy\RsIntegrationWrapper\Client\IClient;
 use J3dyy\RsIntegrationWrapper\Client\IRSResponse;
 use J3dyy\RsIntegrationWrapper\Client\RSResponse;
 use J3dyy\RsIntegrationWrapper\Client\WayBill\Translator;
+use J3dyy\RsIntegrationWrapper\Client\WayBill\WayBillClient;
 use J3dyy\RsIntegrationWrapper\Exceptions\RSIntegrationException;
 
 class RS
@@ -17,6 +18,17 @@ class RS
         protected IClient $wayBillClient
     )
     {
+    }
+
+    /**
+     * @return RS
+     */
+    public static function default(): RS
+    {
+        return new RS(
+            new EApiClient(),
+            new WayBillClient()
+        );
     }
 
     public function authenticate(string $username, string $password): IRSResponse
@@ -42,6 +54,79 @@ class RS
         $body = Translator::checkServiceUser($username,$password);
         return $this->executeWayBillApi('chek_service_user','POST', $body);
     }
+
+    public function getServiceUsers(string $username, string $password, string $ip, string $name, string $unId)
+    {
+        $body = Translator::getServiceUsers($username,$password,$ip,$name, $unId);
+        return $this->executeWayBillApi('get_service_user','POST', $body);
+    }
+
+    public function updateServiceUser(
+        string $username,
+        string $password,
+        string $ip,
+        string $name,
+        ?string $serviceUser = null,
+        ?string $servicePsw = null
+    )
+    {
+        $body = Translator::updateServiceUser($username,$password,$ip,$name,$serviceUser,$servicePsw);
+        return $this->executeWayBillApi('update_service_user', 'POST',$body);
+    }
+
+    public function getAkcizCodes(string $username, string $password)
+    {
+        return $this->executeWayBillApi(
+            'get_akciz_codes',
+            'POST',
+            Translator::withCredentials('get_akciz_codes',$username,$password)
+        );
+    }
+
+    public function getWayBillTypes(string $username, string $password)
+    {
+        return $this->executeWayBillApi(
+            'get_waybill_types',
+            'POST',
+            Translator::withCredentials('get_waybill_types',$username,$password)
+        );
+    }
+
+    public function getWayBillUnits(string $username, string $password)
+    {
+        return $this->executeWayBillApi(
+            'get_waybill_units',
+            'POST',
+            Translator::withCredentials('get_waybill_units',$username,$password)
+        );
+    }
+
+    public function getTransportTypes(string $username, string $password)
+    {
+        return $this->executeWayBillApi(
+            'get_trans_types',
+            'POST',
+            Translator::withCredentials('get_trans_types',$username,$password)
+        );
+    }
+
+    public function getWoodTypes(string $username, string $password)
+    {
+        return $this->executeWayBillApi(
+            'get_wood_types',
+            'POST',
+            Translator::withCredentials('get_wood_types',$username,$password)
+        );
+    }
+
+    public function getWaybillId(string $username, string $password, int $wayBillId)
+    {
+        return $this->executeWayBillApi(
+            'POST',
+            Translator::getWayBill($username,$password, $wayBillId)
+        );
+    }
+
 
     /**
      * @param string $endpoint

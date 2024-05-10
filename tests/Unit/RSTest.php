@@ -57,7 +57,7 @@ describe('test user info', function () use ($rs) {
     });
 
     it('should return empty information', function () use ($rs) {
-        $ressponse = $rs->userInfo('', '');
+        $ressponse = $rs->userInfo('', '');§
         expect($ressponse->getStatusCode())
             ->toBe(401);
     });

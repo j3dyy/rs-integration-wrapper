@@ -21,7 +21,7 @@ class WayBillClient implements IClient
             'handler' => $stack,
             'headers' => [
                 'Content-Type' => 'text/xml; charset=UTF-8',
-                'SOAPAction' => 'http://tempuri.org/chek_service_user'
+//                'SOAPAction' => 'http://tempuri.org/update_service_user'
             ]
         ]);
     }
