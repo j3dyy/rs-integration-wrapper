@@ -48,17 +48,17 @@ describe('test authentication', function () use ($rs) {
 
 describe('test user info', function () use ($rs) {
     it('should return user information', function () use ($rs) {
-        $ressponse = $rs->userInfo('', '');
+        $response = $rs->userInfo('', '');
 
-        expect($ressponse->getResponse())
+        expect($response->getResponse())
             ->toBe(rsInfoSuccessMock())
-        ->and($ressponse->getStatusCode())
+        ->and($response->getStatusCode())
         ->toBe(200);
     });
 
     it('should return empty information', function () use ($rs) {
-        $ressponse = $rs->userInfo('', '');§
-        expect($ressponse->getStatusCode())
+        $response = $rs->userInfo('', '');
+        expect($response->getStatusCode())
             ->toBe(401);
     });
 });
