@@ -52,12 +52,12 @@ class RS
     public function checkServiceUser(string $username, string $password)
     {
         $body = Translator::checkServiceUser($username,$password);
-        return $this->executeWayBillApi('chek_service_user','POST', $body);
+        return $this->executeWayBillApi('chek','POST', $body);
     }
 
-    public function getServiceUsers(string $username, string $password, string $ip, string $name, string $unId)
+    public function getServiceUsers(string $username, string $password)
     {
-        $body = Translator::getServiceUsers($username,$password,$ip,$name, $unId);
+        $body = Translator::getServiceUsers($username,$password);
         return $this->executeWayBillApi('get_service_user','POST', $body);
     }
 
@@ -101,6 +101,36 @@ class RS
         );
     }
 
+    public function getWaybillId(string $username, string $password, int $wayBillId)
+    {
+        return $this->executeWayBillApi(
+            'POST',
+            Translator::getWayBill($username,$password, $wayBillId)
+        );
+    }
+
+
+    public function getBuyerWayBills(string $username, string $password)
+    {
+        $body = Translator::listBuyerWaybill(
+            $username,
+            $password,
+        );
+
+        return $this->executeWayBillApi('get_buyer_waybills','POST', $body);
+    }
+
+    public function getSellerWayBills(string $username, string $password)
+    {
+        $body = Translator::listSellerWaybills(
+            $username,
+            $password,
+        );
+
+
+        return $this->executeWayBillApi('get_waybills_ex','POST', $body);
+    }
+
     public function getTransportTypes(string $username, string $password)
     {
         return $this->executeWayBillApi(
@@ -118,15 +148,6 @@ class RS
             Translator::withCredentials('get_wood_types',$username,$password)
         );
     }
-
-    public function getWaybillId(string $username, string $password, int $wayBillId)
-    {
-        return $this->executeWayBillApi(
-            'POST',
-            Translator::getWayBill($username,$password, $wayBillId)
-        );
-    }
-
 
     /**
      * @param string $endpoint
