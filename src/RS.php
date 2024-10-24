@@ -106,11 +106,84 @@ class RS
     public function getWaybillId(string $username, string $password, int $wayBillId)
     {
         return $this->executeWayBillApi(
+            'get_waybill',
             'POST',
             Translator::getWayBill($username, $password, $wayBillId)
         );
     }
 
+    public function sendWayBill(string $username, string $password, int $wayBillId)
+    {
+        return $this->executeWayBillApi(
+            'send_waybill',
+            'POST',
+            Translator::sendWaybill($username, $password, $wayBillId)
+        );
+    }
+
+    public function confirmWaybill(string $username, string $password, int $wayBillId)
+    {
+        return $this->executeWayBillApi(
+            'confirm_waybill',
+            'POST',
+            Translator::confirmWaybill($username, $password, $wayBillId)
+        );
+    }
+
+    public function confirmByDateWayBill(
+        string $username,
+        string $password,
+        int $wayBillId,
+        string $beginDate,
+    )
+    {
+        return $this->executeWayBillApi(
+            'send_waybill_vd',
+            'POST',
+            Translator::confirmWaybillByDate($username, $password, $wayBillId, $beginDate)
+        );
+    }
+
+    public function closeWayBill(string $username, string $password, int $wayBillId)
+    {
+        return $this->executeWayBillApi(
+            'close_waybill',
+            'POST',
+            Translator::closeWayBill($username, $password, $wayBillId)
+        );
+    }
+
+    public function closeByDateWayBill(
+        string $username,
+        string $password,
+        int $wayBillId,
+        string $beginDate,
+    )
+    {
+        return $this->executeWayBillApi(
+            'close_waybill_vd',
+            'POST',
+            Translator::closeWaybillByDate($username, $password, $wayBillId, $beginDate)
+        );
+    }
+
+    public function deleteWayBill(string $username, string $password, int $wayBillId)
+    {
+        return $this->executeWayBillApi(
+            'del_waybill',
+            'POST',
+            Translator::deleteWayBill($username, $password, $wayBillId)
+        );
+    }
+
+    public function refuseWayBill(string $username, string $password, int $wayBillId)
+    {
+        return $this->executeWayBillApi(
+            'ref_waybill',
+            'POST',
+            Translator::refuseWayBill($username, $password, $wayBillId)
+        );
+    }
 
     public function listSubscribedSellerWaybills(
         QueryBuilder $builder,

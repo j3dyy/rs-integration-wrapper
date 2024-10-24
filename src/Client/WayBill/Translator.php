@@ -81,6 +81,79 @@ class Translator
         ');
     }
 
+    public static function sendWaybill(string $username, string $password, int $wayBillId): string{
+        return self::inject('
+            <send_waybill xmlns="http://tempuri.org/">
+				<su>' . $username . '</su>
+				<sp>' . $password . '</sp>
+				<waybill_id>' . $wayBillId . '</waybill_id>
+			</send_waybill>
+        ');
+    }
+
+    public static function confirmWaybill(string $username, string $password, int $wayBillId): string{
+        return self::inject('
+            <confirm_waybill xmlns="http://tempuri.org/">
+				<su>' . $username . '</su>
+				<sp>' . $password . '</sp>
+				<waybill_id>' . $wayBillId . '</waybill_id>
+			</confirm_waybill>
+        ');
+    }
+
+    public static function confirmWaybillByDate(string $username, string $password, int $wayBillId, string $beginDate): string{
+        return self::inject('
+            <send_waybill_vd xmlns="http://tempuri.org/">
+				<su>' . $username . '</su>
+				<sp>' . $password . '</sp>
+				<waybill_id>' . $wayBillId . '</waybill_id>
+				<begin_date>' . $beginDate . '</begin_date>
+			</send_waybill_vd>
+        ');
+    }
+
+
+    public static function closeWayBill(string $username, string $password, int $wayBillId): string{
+        return self::inject('
+            <close_waybill xmlns="http://tempuri.org/">
+				<su>' . $username . '</su>
+				<sp>' . $password . '</sp>
+				<waybill_id>' . $wayBillId . '</waybill_id>
+			</close_waybill>
+        ');
+    }
+
+    public static function closeWaybillByDate(string $username, string $password, int $wayBillId, string $beginDate): string{
+        return self::inject('
+            <close_waybill_vd xmlns="http://tempuri.org/">
+				<su>' . $username . '</su>
+				<sp>' . $password . '</sp>
+				<waybill_id>' . $wayBillId . '</waybill_id>
+				<begin_date>' . $beginDate . '</begin_date>
+			</close_waybill_vd>
+        ');
+    }
+
+    public static function deleteWayBill(string $username, string $password, int $wayBillId): string{
+        return self::inject('
+            <del_waybill xmlns="http://tempuri.org/">
+				<su>' . $username . '</su>
+				<sp>' . $password . '</sp>
+				<waybill_id>' . $wayBillId . '</waybill_id>
+			</del_waybill>
+        ');
+    }
+
+    public static function refuseWayBill(string $username, string $password, int $wayBillId): string{
+        return self::inject('
+            <ref_waybill xmlns="http://tempuri.org/">
+				<su>' . $username . '</su>
+				<sp>' . $password . '</sp>
+				<waybill_id>' . $wayBillId . '</waybill_id>
+			</ref_waybill>
+        ');
+    }
+
     public static function withCredentials(string $method, string $username, string $password): string
     {
         return self::inject('
