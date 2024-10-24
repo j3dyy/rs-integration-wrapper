@@ -127,7 +127,14 @@ class WayBillBuilder implements QueryBuilder
 
     public function userIds(array $userIds): self
     {
-        $this->query .= $this->prepend('user_ids', $userIds);
+        $ids = '';
+        if ($userIds != null && count($userIds) > 0) {
+            foreach ($userIds as $i) {
+                $ids .= sprintf('%s,', $i);
+            }
+        }
+
+        $this->query .= $this->prepend('s_user_ids', $ids);
         return $this;
     }
 
