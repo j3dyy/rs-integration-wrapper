@@ -60,13 +60,13 @@ class WayBillBuilder implements QueryBuilder
 
     public function beginDateStart(string $beginDateStart): self
     {
-        $this->query .= $this->prepend('begin_date_s', $beginDateStart);
+        $this->query .= $this->prepend('begin_date_s', $this->maskDate($beginDateStart));
         return $this;
     }
 
     public function beginDateEnd(string $beginDateEnd): self
     {
-        $this->query .= $this->prepend('begin_date_e', $beginDateEnd);
+        $this->query .= $this->prepend('begin_date_e', $this->maskDate($beginDateEnd));
         return $this;
     }
 
@@ -78,7 +78,7 @@ class WayBillBuilder implements QueryBuilder
 
     public function createdDateEnd(string $createdDateEnd): self
     {
-        $this->query .= $this->prepend('create_date_e', $createdDateEnd);
+        $this->query .= $this->prepend('create_date_e', $this->maskDate($createdDateEnd));
         return $this;
     }
 
@@ -91,13 +91,13 @@ class WayBillBuilder implements QueryBuilder
 
     public function deliveryDateStart(string $deliveryDateStart): self
     {
-        $this->query .= $this->prepend('delivery_date_s', $deliveryDateStart);
+        $this->query .= $this->prepend('delivery_date_s', $this->maskDate($deliveryDateStart));
         return $this;
     }
 
     public function deliveryDateEnd(string $deliveryDateEnd): self
     {
-        $this->query .= $this->prepend('delivery_date_e', $deliveryDateEnd);
+        $this->query .= $this->prepend('delivery_date_e', $this->maskDate($deliveryDateEnd));
         return $this;
     }
 
@@ -115,13 +115,13 @@ class WayBillBuilder implements QueryBuilder
 
     public function closeDateStart(string $closeDateStart): self
     {
-        $this->query .= $this->prepend('close_date_s', $closeDateStart);
+        $this->query .= $this->prepend('close_date_s', $this->maskDate($closeDateStart));
         return $this;
     }
 
     public function closeDateEnd(string $closeDateEnd): self
     {
-        $this->query .= $this->prepend('close_date_e', $closeDateEnd);
+        $this->query .= $this->prepend('close_date_e', $this->maskDate($closeDateEnd));
         return $this;
     }
 
