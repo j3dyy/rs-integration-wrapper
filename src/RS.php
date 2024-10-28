@@ -8,6 +8,9 @@ use J3dyy\RsIntegrationWrapper\Client\IClient;
 use J3dyy\RsIntegrationWrapper\Client\IRSResponse;
 use J3dyy\RsIntegrationWrapper\Client\QueryBuilder;
 use J3dyy\RsIntegrationWrapper\Client\RSResponse;
+use J3dyy\RsIntegrationWrapper\Client\WayBill\Enum\RSService;
+use J3dyy\RsIntegrationWrapper\Client\WayBill\Models\WayBill;
+use J3dyy\RsIntegrationWrapper\Client\WayBill\Service\WayBillService;
 use J3dyy\RsIntegrationWrapper\Client\WayBill\Translator;
 use J3dyy\RsIntegrationWrapper\Client\WayBill\WayBillClient;
 use J3dyy\RsIntegrationWrapper\Exceptions\RSIntegrationException;
@@ -33,6 +36,22 @@ class RS
         );
     }
 
+    public function getService(RSService $rsService)
+    {
+        $service = null;
+        switch ($rsService){
+            case RSService::WAYBILL:
+                $service =  new WayBillService(
+                    $this->wayBillClient
+                );
+                break;
+            default:
+                throw new RsIntegrationException(sprintf("service %s not iplemented", $rsService->value));
+        }
+
+        return $service;
+    }
+
     public function authenticate(string $username, string $password): IRSResponse
     {
         return $this->executeEApi('Users/Authenticate', 'POST', [
@@ -49,196 +68,6 @@ class RS
             'Authorization' => 'Bearer ' . $token,
             'Content-Type: application/json'
         ]);
-    }
-
-    public function checkServiceUser(string $username, string $password)
-    {
-        $body = Translator::checkServiceUser($username, $password);
-        return $this->executeWayBillApi('chek', 'POST', $body);
-    }
-
-    public function getServiceUsers(string $username, string $password)
-    {
-        $body = Translator::getServiceUsers($username, $password);
-        return $this->executeWayBillApi('get_service_user', 'POST', $body);
-    }
-
-    public function updateServiceUser(
-        string  $username,
-        string  $password,
-        string  $ip,
-        string  $name,
-        ?string $serviceUser = null,
-        ?string $servicePsw = null
-    )
-    {
-        $body = Translator::updateServiceUser($username, $password, $ip, $name, $serviceUser, $servicePsw);
-        return $this->executeWayBillApi('update_service_user', 'POST', $body);
-    }
-
-    public function getAkcizCodes(string $username, string $password)
-    {
-        return $this->executeWayBillApi(
-            'get_akciz_codes',
-            'POST',
-            Translator::withCredentials('get_akciz_codes', $username, $password)
-        );
-    }
-
-    public function getWayBillTypes(string $username, string $password)
-    {
-        return $this->executeWayBillApi(
-            'get_waybill_types',
-            'POST',
-            Translator::withCredentials('get_waybill_types', $username, $password)
-        );
-    }
-
-    public function getWayBillUnits(string $username, string $password)
-    {
-        return $this->executeWayBillApi(
-            'get_waybill_units',
-            'POST',
-            Translator::withCredentials('get_waybill_units', $username, $password)
-        );
-    }
-
-    public function getWaybillId(string $username, string $password, int $wayBillId)
-    {
-        return $this->executeWayBillApi(
-            'get_waybill',
-            'POST',
-            Translator::getWayBill($username, $password, $wayBillId)
-        );
-    }
-
-    public function sendWayBill(string $username, string $password, int $wayBillId)
-    {
-        return $this->executeWayBillApi(
-            'send_waybill',
-            'POST',
-            Translator::sendWaybill($username, $password, $wayBillId)
-        );
-    }
-
-    public function confirmWaybill(string $username, string $password, int $wayBillId)
-    {
-        return $this->executeWayBillApi(
-            'confirm_waybill',
-            'POST',
-            Translator::confirmWaybill($username, $password, $wayBillId)
-        );
-    }
-
-    public function confirmByDateWayBill(
-        string $username,
-        string $password,
-        int $wayBillId,
-        string $beginDate,
-    )
-    {
-        return $this->executeWayBillApi(
-            'send_waybill_vd',
-            'POST',
-            Translator::confirmWaybillByDate($username, $password, $wayBillId, $beginDate)
-        );
-    }
-
-    public function closeWayBill(string $username, string $password, int $wayBillId)
-    {
-        return $this->executeWayBillApi(
-            'close_waybill',
-            'POST',
-            Translator::closeWayBill($username, $password, $wayBillId)
-        );
-    }
-
-    public function closeByDateWayBill(
-        string $username,
-        string $password,
-        int $wayBillId,
-        string $beginDate,
-    )
-    {
-        return $this->executeWayBillApi(
-            'close_waybill_vd',
-            'POST',
-            Translator::closeWaybillByDate($username, $password, $wayBillId, $beginDate)
-        );
-    }
-
-    public function deleteWayBill(string $username, string $password, int $wayBillId)
-    {
-        return $this->executeWayBillApi(
-            'del_waybill',
-            'POST',
-            Translator::deleteWayBill($username, $password, $wayBillId)
-        );
-    }
-
-    public function refuseWayBill(string $username, string $password, int $wayBillId)
-    {
-        return $this->executeWayBillApi(
-            'ref_waybill',
-            'POST',
-            Translator::refuseWayBill($username, $password, $wayBillId)
-        );
-    }
-
-    public function listSubscribedSellerWaybills(
-        QueryBuilder $builder,
-    )
-    {
-        $query = sprintf("<get_waybills  xmlns='http://tempuri.org/'>%s\n</get_waybills>", $builder->getQuery());
-        $query = Translator::inject($query);
-        return $this->executeWayBillApi('get_waybills', 'POST', $query);
-    }
-
-    public function listSubscribedSellerWaybillsEx(
-        QueryBuilder $builder,
-    )
-    {
-        $query = sprintf("<get_waybills_ex  xmlns='http://tempuri.org/'>%s\n</get_waybills_ex>", $builder->getQuery());
-        $query = Translator::inject($query);
-        return $this->executeWayBillApi('get_waybills', 'POST', $query);
-    }
-
-    public function listReceivedBuyerWaybills(
-        QueryBuilder $builder,
-    )
-    {
-        $query = sprintf("<get_buyer_waybills  xmlns='http://tempuri.org/'>%s\n</get_buyer_waybills>", $builder->getQuery());
-        $query = Translator::inject($query);
-        return $this->executeWayBillApi('get_buyer_waybills', 'POST', $query);
-    }
-
-    public function listReceivedBuyerWaybillsEx(
-        QueryBuilder $builder,
-    )
-    {
-        $query = sprintf("<get_buyer_waybills_ex  xmlns='http://tempuri.org/'>%s\n</get_buyer_waybills_ex>", $builder->getQuery());
-        $query = Translator::inject($query);
-        return $this->executeWayBillApi('get_buyer_waybills_ex', 'POST', $query);
-    }
-
-
-
-    public function getTransportTypes(string $username, string $password)
-    {
-        return $this->executeWayBillApi(
-            'get_trans_types',
-            'POST',
-            Translator::withCredentials('get_trans_types', $username, $password)
-        );
-    }
-
-    public function getWoodTypes(string $username, string $password)
-    {
-        return $this->executeWayBillApi(
-            'get_wood_types',
-            'POST',
-            Translator::withCredentials('get_wood_types', $username, $password)
-        );
     }
 
 
@@ -267,28 +96,5 @@ class RS
         }
     }
 
-    /**
-     * @param string $endpoint
-     * @param string $method
-     * @param string $payload
-     * @return IRSResponse
-     */
-    protected function executeWayBillApi(string $endpoint, string $method = 'GET', string $payload = '', array $headers = []): IRSResponse
-    {
-        try {
-            return $this->wayBillClient->request($method, $endpoint, [
-                'body' => $payload,
-                'headers' => $headers
-            ]);
 
-        } catch (RSIntegrationException $exception) {
-            return new RSResponse(
-                [
-                    'message' => $exception->getMessage(),
-                ],
-                $exception->getCode(),
-                []
-            );
-        }
-    }
 }

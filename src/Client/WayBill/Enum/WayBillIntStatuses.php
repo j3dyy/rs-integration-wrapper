@@ -2,12 +2,12 @@
 
 namespace J3dyy\RsIntegrationWrapper\Client\WayBill\Enum;
 
-enum WayBillStatuses: string
+enum WayBillIntStatuses: int
 {
-    case Active = "აქტიური";
-    case Cancelled = "გაუქმებული";
-    case Finished = "დასრულებული";
-    case ForwardedToTheCarrier = "გადამზიდავთან გადაგზავნილი";
+    case Saved = 0;
+    case Active = 1;
+    case Finished = 2;
+
     
 
 

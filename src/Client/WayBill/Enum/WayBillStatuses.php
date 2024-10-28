@@ -10,4 +10,5 @@ enum WayBillStatuses: string
     case ForwardedToTheCarrier = "გადამზიდავთან გადაგზავნილი";
 
 
+
 }
