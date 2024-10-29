@@ -6,13 +6,11 @@ namespace J3dyy\RsIntegrationWrapper;
 use J3dyy\RsIntegrationWrapper\Client\EApiClient;
 use J3dyy\RsIntegrationWrapper\Client\IClient;
 use J3dyy\RsIntegrationWrapper\Client\IRSResponse;
-use J3dyy\RsIntegrationWrapper\Client\QueryBuilder;
 use J3dyy\RsIntegrationWrapper\Client\RSResponse;
 use J3dyy\RsIntegrationWrapper\Client\WayBill\Enum\RSService;
-use J3dyy\RsIntegrationWrapper\Client\WayBill\Models\WayBill;
 use J3dyy\RsIntegrationWrapper\Client\WayBill\Service\WayBillService;
-use J3dyy\RsIntegrationWrapper\Client\WayBill\Translator;
 use J3dyy\RsIntegrationWrapper\Client\WayBill\WayBillClient;
+use J3dyy\RsIntegrationWrapper\Client\XDataRS;
 use J3dyy\RsIntegrationWrapper\Exceptions\RSIntegrationException;
 
 class RS
@@ -20,7 +18,8 @@ class RS
 
     public function __construct(
         protected IClient $eApiClient,
-        protected IClient $wayBillClient
+        protected IClient $wayBillClient,
+        protected IClient $publicRsClient
     )
     {
     }
@@ -32,7 +31,8 @@ class RS
     {
         return new RS(
             new EApiClient(),
-            new WayBillClient()
+            new WayBillClient(),
+            new XDataRS()
         );
     }
 
@@ -58,6 +58,29 @@ class RS
             'USERNAME' => $username,
             'PASSWORD' => $password,
         ]);
+    }
+
+    public function getPublicInfo(string $identCode): IRSResponse
+    {
+        try {
+            return $this->publicRsClient->request('post', 'TaxPayer/RSPublicInfo', [
+                'json' => [
+                    'IdentCode' => $identCode
+                ],
+                'headers' => [
+                    'Content-Type' => 'application/json',
+                ]
+            ]);
+
+        } catch (RSIntegrationException $exception) {
+            return new RSResponse(
+                [
+                    'message' => $exception->getMessage(),
+                ],
+                $exception->getCode(),
+                []
+            );
+        }
     }
 
     public function userInfo(string $rsUser, string $token): IRSResponse
