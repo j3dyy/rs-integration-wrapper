@@ -153,7 +153,7 @@ class WayBillBuilder implements QueryBuilder
             }
         }
 
-        $this->query .= $this->prepend('way_bill_types', $joinedTypes);
+        $this->query .= $this->prepend('itypes', $joinedTypes);
         return $this;
     }
 
