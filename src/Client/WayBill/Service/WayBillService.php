@@ -412,6 +412,7 @@ class WayBillService
     {
         $query = sprintf("<get_buyer_waybills  xmlns='http://tempuri.org/'>%s\n</get_buyer_waybills>", $builder->getQuery());
         $query = Translator::inject($query);
+
         return $this->executeWayBillApi('get_buyer_waybills', 'POST', $query);
     }
 
