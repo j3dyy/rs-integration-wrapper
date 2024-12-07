@@ -109,7 +109,7 @@ class WayBillBuilder implements QueryBuilder
 
     public function wayBillNumber(string $wayBillNumber): self
     {
-        $this->query .= $this->prepend('way_bill_number', $wayBillNumber);
+        $this->query .= $this->prepend('waybill_number', $wayBillNumber);
         return $this;
     }
 
