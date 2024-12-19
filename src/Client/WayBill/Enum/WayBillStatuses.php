@@ -8,7 +8,4 @@ enum WayBillStatuses: string
     case Cancelled = "გაუქმებული";
     case Finished = "დასრულებული";
     case ForwardedToTheCarrier = "გადამზიდავთან გადაგზავნილი";
-
-
-
 }

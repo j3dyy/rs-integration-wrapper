@@ -87,7 +87,7 @@ class WayBillService
         );
     }
 
-    public function getWayBillTemplates(string $username, string $password, )
+    public function getWayBillTemplates(string $username, string $password)
     {
         return $this->executeWayBillApi(
             'save_waybill_tamplate',
