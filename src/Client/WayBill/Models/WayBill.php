@@ -148,20 +148,20 @@ class WayBill implements Transferable
                     ' . $woods . '
                 </WOOD_DOCS_LIST>
                 <ID>' . $this->id . '</ID>
-                <TYPE>' . $this->type->value . '</TYPE>
+                <TYPE>' . $this->type?->value . '</TYPE>
                 <BUYER_TIN>' . $this->buyerTin . '</BUYER_TIN>
                 <CHEK_BUYER_TIN>' . $this->checkBuyerTin . '</CHEK_BUYER_TIN>
                 <BUYER_NAME>' . $this->buyerName . '</BUYER_NAME>
                 <START_ADDRESS>' . $this->startAddress . '</START_ADDRESS>
                 <END_ADDRESS>' . $this->endAddress . '</END_ADDRESS>
                 <DRIVER_TIN>' . $this->driverTin . '</DRIVER_TIN>
-                <CHEK_DRIVER_TIN>' . $this->checkDriverTin->value . '</CHEK_DRIVER_TIN>
+                <CHEK_DRIVER_TIN>' . $this->checkDriverTin?->value . '</CHEK_DRIVER_TIN>
                 <DRIVER_NAME>' . $this->driverName . '</DRIVER_NAME>
                 <TRANSPORT_COAST>' . $this->transportCoast . '</TRANSPORT_COAST>
                 <RECEPTION_INFO>' . $this->receptionInfo . '</RECEPTION_INFO>
                 <RECEIVER_INFO>' . $this->receiverInfo . '</RECEIVER_INFO>
                 <DELIVERY_DATE>' . $this->deliveryDate . '</DELIVERY_DATE>
-                <STATUS>' . $this->status->value . '</STATUS>
+                <STATUS>' . $this->status?->value . '</STATUS>
                 <SELER_UN_ID>' . $this->sellerUniqueId . '</SELER_UN_ID>
                 <PAR_ID>' . $this->parId . '</PAR_ID>
                 <FULL_AMOUNT>' . $this->fullAmount . '</FULL_AMOUNT>
@@ -169,8 +169,8 @@ class WayBill implements Transferable
                 <WAYBILL_NUMBER>' . $this->wayBillNumber . '</WAYBILL_NUMBER>
                 <S_USER_ID>' . $this->sUserId . '</S_USER_ID>
                 <BEGIN_DATE>' . $this->beginDate . '</BEGIN_DATE>
-                <TRAN_COST_PAYER>' . $this->tranCostPayer->value . '</TRAN_COST_PAYER>
-                <TRANS_ID>' . $this->transId->value . '</TRANS_ID>
+                <TRAN_COST_PAYER>' . $this->tranCostPayer?->value . '</TRAN_COST_PAYER>
+                <TRANS_ID>' . $this->transId?->value . '</TRANS_ID>
                 <TRANS_TXT>' . $this->transTxt . '</TRANS_TXT>
                 <COMMENT>' . $this->comment . '</COMMENT>
                 <CATEGORY>' . $this->category . '</CATEGORY>
