@@ -119,6 +119,317 @@ class WayBill implements Transferable
         $this->isMed = $isMed;
     }
 
+    public function getSubWayBill(): array
+    {
+        return $this->subWayBill;
+    }
+
+    public function setSubWayBill(array $subWayBill): void
+    {
+        $this->subWayBill = $subWayBill;
+    }
+
+    public function getGoodList(): array
+    {
+        return $this->goodList;
+    }
+
+    public function setGoodList(array $goodList): void
+    {
+        $this->goodList = $goodList;
+    }
+
+    public function getWoodDocuments(): array
+    {
+        return $this->woodDocuments;
+    }
+
+    public function setWoodDocuments(array $woodDocuments): void
+    {
+        $this->woodDocuments = $woodDocuments;
+    }
+
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
+
+    public function getType(): WayBillTypes
+    {
+        return $this->type;
+    }
+
+    public function setType(WayBillTypes $type): void
+    {
+        $this->type = $type;
+    }
+
+    public function getBuyerTin(): ?int
+    {
+        return $this->buyerTin;
+    }
+
+    public function setBuyerTin(?int $buyerTin): void
+    {
+        $this->buyerTin = $buyerTin;
+    }
+
+    public function getCheckBuyerTin(): ?int
+    {
+        return $this->checkBuyerTin;
+    }
+
+    public function setCheckBuyerTin(?int $checkBuyerTin): void
+    {
+        $this->checkBuyerTin = $checkBuyerTin;
+    }
+
+    public function getBuyerName(): ?string
+    {
+        return $this->buyerName;
+    }
+
+    public function setBuyerName(?string $buyerName): void
+    {
+        $this->buyerName = $buyerName;
+    }
+
+    public function getStartAddress(): string
+    {
+        return $this->startAddress;
+    }
+
+    public function setStartAddress(string $startAddress): void
+    {
+        $this->startAddress = $startAddress;
+    }
+
+    public function getEndAddress(): string
+    {
+        return $this->endAddress;
+    }
+
+    public function setEndAddress(string $endAddress): void
+    {
+        $this->endAddress = $endAddress;
+    }
+
+    public function getDriverTin(): ?string
+    {
+        return $this->driverTin;
+    }
+
+    public function setDriverTin(?string $driverTin): void
+    {
+        $this->driverTin = $driverTin;
+    }
+
+    public function getCheckDriverTin(): ?CitizenType
+    {
+        return $this->checkDriverTin;
+    }
+
+    public function setCheckDriverTin(?CitizenType $checkDriverTin): void
+    {
+        $this->checkDriverTin = $checkDriverTin;
+    }
+
+    public function getDriverName(): ?string
+    {
+        return $this->driverName;
+    }
+
+    public function setDriverName(?string $driverName): void
+    {
+        $this->driverName = $driverName;
+    }
+
+    public function getTransportCoast(): ?float
+    {
+        return $this->transportCoast;
+    }
+
+    public function setTransportCoast(?float $transportCoast): void
+    {
+        $this->transportCoast = $transportCoast;
+    }
+
+    public function getReceptionInfo(): ?string
+    {
+        return $this->receptionInfo;
+    }
+
+    public function setReceptionInfo(?string $receptionInfo): void
+    {
+        $this->receptionInfo = $receptionInfo;
+    }
+
+    public function getReceiverInfo(): ?string
+    {
+        return $this->receiverInfo;
+    }
+
+    public function setReceiverInfo(?string $receiverInfo): void
+    {
+        $this->receiverInfo = $receiverInfo;
+    }
+
+    public function getDeliveryDate(): ?string
+    {
+        return $this->deliveryDate;
+    }
+
+    public function setDeliveryDate(?string $deliveryDate): void
+    {
+        $this->deliveryDate = $deliveryDate;
+    }
+
+    public function getStatus(): WayBillStatuses
+    {
+        return $this->status;
+    }
+
+    public function setStatus(WayBillStatuses $status): void
+    {
+        $this->status = $status;
+    }
+
+    public function getSellerUniqueId(): int
+    {
+        return $this->sellerUniqueId;
+    }
+
+    public function setSellerUniqueId(int $sellerUniqueId): void
+    {
+        $this->sellerUniqueId = $sellerUniqueId;
+    }
+
+    public function getParId(): ?int
+    {
+        return $this->parId;
+    }
+
+    public function setParId(?int $parId): void
+    {
+        $this->parId = $parId;
+    }
+
+    public function getFullAmount(): float
+    {
+        return $this->fullAmount;
+    }
+
+    public function setFullAmount(float $fullAmount): void
+    {
+        $this->fullAmount = $fullAmount;
+    }
+
+    public function getCarNumber(): ?string
+    {
+        return $this->carNumber;
+    }
+
+    public function setCarNumber(?string $carNumber): void
+    {
+        $this->carNumber = $carNumber;
+    }
+
+    public function getWayBillNumber(): ?string
+    {
+        return $this->wayBillNumber;
+    }
+
+    public function setWayBillNumber(?string $wayBillNumber): void
+    {
+        $this->wayBillNumber = $wayBillNumber;
+    }
+
+    public function getSUserId(): string
+    {
+        return $this->sUserId;
+    }
+
+    public function setSUserId(string $sUserId): void
+    {
+        $this->sUserId = $sUserId;
+    }
+
+    public function getBeginDate(): string
+    {
+        return $this->beginDate;
+    }
+
+    public function setBeginDate(string $beginDate): void
+    {
+        $this->beginDate = $beginDate;
+    }
+
+    public function getTranCostPayer(): TransportCostTypes
+    {
+        return $this->tranCostPayer;
+    }
+
+    public function setTranCostPayer(TransportCostTypes $tranCostPayer): void
+    {
+        $this->tranCostPayer = $tranCostPayer;
+    }
+
+    public function getTransId(): WaybillTransportTypes
+    {
+        return $this->transId;
+    }
+
+    public function setTransId(WaybillTransportTypes $transId): void
+    {
+        $this->transId = $transId;
+    }
+
+    public function getTransTxt(): ?string
+    {
+        return $this->transTxt;
+    }
+
+    public function setTransTxt(?string $transTxt): void
+    {
+        $this->transTxt = $transTxt;
+    }
+
+    public function getComment(): ?string
+    {
+        return $this->comment;
+    }
+
+    public function setComment(?string $comment): void
+    {
+        $this->comment = $comment;
+    }
+
+    public function getCategory(): int
+    {
+        return $this->category;
+    }
+
+    public function setCategory(int $category): void
+    {
+        $this->category = $category;
+    }
+
+    public function getIsMed(): int
+    {
+        return $this->isMed;
+    }
+
+    public function setIsMed(int $isMed): void
+    {
+        $this->isMed = $isMed;
+    }
+
+
 
     function transfer(): string
     {
