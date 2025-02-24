@@ -6,7 +6,7 @@ use J3dyy\RsIntegrationWrapper\Client\IClient;
 use J3dyy\RsIntegrationWrapper\Client\IRSResponse;
 use J3dyy\RsIntegrationWrapper\Client\QueryBuilder;
 use J3dyy\RsIntegrationWrapper\Client\RSResponse;
-use J3dyy\RsIntegrationWrapper\Client\WayBill\Models\WayBill;
+use J3dyy\RsIntegrationWrapper\Client\WayBill\Models\Transferable;
 use J3dyy\RsIntegrationWrapper\Client\WayBill\Translator;
 use J3dyy\RsIntegrationWrapper\Exceptions\RSIntegrationException;
 
@@ -57,7 +57,7 @@ class WayBillService
         );
     }
 
-    public function saveWayBill(string $username, string $password, WayBill $wayBill)
+    public function saveWayBill(string $username, string $password, Transferable $wayBill)
     {
 
         return $this->executeWayBillApi(
@@ -72,7 +72,7 @@ class WayBillService
         );
     }
 
-    public function saveWayBillTemplate(string $username, string $password, string $vname,WayBill $wayBill)
+    public function saveWayBillTemplate(string $username, string $password, string $vname,Transferable $wayBill)
     {
         return $this->executeWayBillApi(
             'save_waybill_tamplate',

@@ -8,6 +8,9 @@ use J3dyy\RsIntegrationWrapper\Client\WayBill\Enum\WayBillStatuses;
 use J3dyy\RsIntegrationWrapper\Client\WayBill\Enum\WaybillTransportTypes;
 use J3dyy\RsIntegrationWrapper\Client\WayBill\Enum\WayBillTypes;
 
+/**
+ * waybill representation
+ */
 class WayBill implements Transferable
 {
     /**
