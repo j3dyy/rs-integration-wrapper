@@ -72,6 +72,15 @@ class WayBillService
         );
     }
 
+    public function getErrors(string $username, string $password)
+    {
+        return $this->executeWayBillApi(
+            'get_error_codes',
+            'POST',
+            Translator::withCredentials('get_error_codes', $username, $password)
+        );
+    }
+
     public function saveWayBillTemplate(string $username, string $password, string $vname,Transferable $wayBill)
     {
         return $this->executeWayBillApi(
