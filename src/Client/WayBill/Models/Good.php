@@ -8,10 +8,10 @@ class Good implements Transferable
     protected string $wName;
     protected int $unitId;
     protected string $unitTXT;
-    protected int $quantity;
+    protected float $quantity;
     protected float $price;
     protected int $status;
-    protected int $amount;
+    protected float $amount;
     protected string $barCode;
     protected int $aId;
     protected int $vatType;
@@ -24,10 +24,10 @@ class Good implements Transferable
      * @param string $wName
      * @param int $unitId
      * @param string $unitTXT
-     * @param int $quantity
+     * @param float $quantity
      * @param float $price
      * @param int $status
-     * @param int $amount
+     * @param float $amount
      * @param string $barCode
      * @param int $aId
      * @param int $vatType
@@ -40,10 +40,10 @@ class Good implements Transferable
         string $wName,
         int $unitId,
         string $unitTXT,
-        int $quantity,
+        float $quantity,
         float $price,
         int $status,
-        int $amount,
+        float $amount,
         string $barCode,
         int $aId,
         int $vatType,
@@ -107,12 +107,12 @@ class Good implements Transferable
         $this->unitTXT = $unitTXT;
     }
 
-    public function getQuantity(): int
+    public function getQuantity(): float
     {
         return $this->quantity;
     }
 
-    public function setQuantity(int $quantity): void
+    public function setQuantity(float $quantity): void
     {
         $this->quantity = $quantity;
     }
@@ -137,12 +137,12 @@ class Good implements Transferable
         $this->status = $status;
     }
 
-    public function getAmount(): int
+    public function getAmount(): float
     {
         return $this->amount;
     }
 
-    public function setAmount(int $amount): void
+    public function setAmount(float $amount): void
     {
         $this->amount = $amount;
     }
