@@ -26,6 +26,10 @@ class RSResponse implements IRSResponse
                 $r = strtr($response->getBody()->getContents(), ['</soap:' => '</', '<soap:' => '<']);
                 $data = (array)json_decode(json_encode(simplexml_load_string($r)));
                 break;
+            case 'invoice':
+                $r = strtr($response->getBody()->getContents(), ['</soap:' => '</', '<soap:' => '<']);
+                $data = (array)json_decode(json_encode(simplexml_load_string($r)));
+                break;
         }
 
 
