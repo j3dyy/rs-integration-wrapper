@@ -5,6 +5,8 @@ namespace J3dyy\RsIntegrationWrapper;
 
 use J3dyy\RsIntegrationWrapper\Client\EApiClient;
 use J3dyy\RsIntegrationWrapper\Client\IClient;
+use J3dyy\RsIntegrationWrapper\Client\Invoice\InvoiceClient;
+use J3dyy\RsIntegrationWrapper\Client\Invoice\Service\InvoiceService;
 use J3dyy\RsIntegrationWrapper\Client\IRSResponse;
 use J3dyy\RsIntegrationWrapper\Client\RSResponse;
 use J3dyy\RsIntegrationWrapper\Client\WayBill\Enum\RSService;
@@ -19,20 +21,19 @@ class RS
     public function __construct(
         protected IClient $eApiClient,
         protected IClient $wayBillClient,
-        protected IClient $publicRsClient
+        protected IClient $publicRsClient,
+        protected IClient $invoiceClient,
     )
     {
     }
 
-    /**
-     * @return RS
-     */
     public static function default(): RS
     {
         return new RS(
             new EApiClient(),
             new WayBillClient(),
-            new XDataRS()
+            new XDataRS(),
+            new InvoiceClient(),
         );
     }
 
@@ -41,9 +42,10 @@ class RS
         $service = null;
         switch ($rsService){
             case RSService::WAYBILL:
-                $service =  new WayBillService(
-                    $this->wayBillClient
-                );
+                $service = new WayBillService($this->wayBillClient);
+                break;
+            case RSService::INVOICE:
+                $service = new InvoiceService($this->invoiceClient);
                 break;
             default:
                 throw new RsIntegrationException(sprintf("service %s not iplemented", $rsService->value));
