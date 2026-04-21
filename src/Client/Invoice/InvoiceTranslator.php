@@ -6,7 +6,7 @@ use J3dyy\RsIntegrationWrapper\Client\Invoice\Enum\InvoiceStatus;
 
 class InvoiceTranslator
 {
-    public static function chek(string $username, string $password, ?int $userId = null): string
+    public static function check(string $username, string $password, ?int $userId = null): string
     {
         return self::inject('
             <chek xmlns="http://tempuri.org/">

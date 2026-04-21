@@ -15,12 +15,12 @@ class InvoiceService
     {
     }
 
-    public function chek(string $username, string $password, ?int $userId = null): IRSResponse
+    public function check(string $username, string $password, ?int $userId = null): IRSResponse
     {
         return $this->executeInvoiceApi(
             'chek',
             'POST',
-            InvoiceTranslator::chek($username, $password, $userId)
+            InvoiceTranslator::check($username, $password, $userId)
         );
     }
 
